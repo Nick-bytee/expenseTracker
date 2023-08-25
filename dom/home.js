@@ -163,7 +163,7 @@ async function additem(a) {
             await axios.post('http://localhost:3000/addExpense',
                 my_obj)
 
-            const data = await axios.get(`http://localhost:3000/getExpenses`, {
+            const data = await axios.get(`http://localhost:3000/expense/getExpenses`, {
                 headers: {
                     'Auth': token
                 }
@@ -186,13 +186,13 @@ async function deleteItem(id) {
     const token = localStorage.getItem('token')
     if (confirm('Are You Sure You want to delete this item?')) {
         try {
-            await axios.delete(`http://localhost:3000/deleteExpense/${id}`, {
+            await axios.delete(`http://localhost:3000/expense/deleteExpense/${id}`, {
                 headers: {
                     'Auth': token
                 }
             })
 
-            const data = await axios.get(`http://localhost:3000/getExpenses`, {
+            const data = await axios.get(`http://localhost:3000/expense/getExpenses`, {
                 headers: {
                     'Auth': token
                 }
@@ -216,12 +216,12 @@ async function saveUpdatedItem() {
     const form = document.getElementById('addForm')
     form.children.innerHTML = ''
     try {
-        await axios.put(`http://localhost:3000/updateExpense/${editID}`,
+        await axios.put(`http://localhost:3000/expense/updateExpense/${editID}`,
             obj)
 
         document.getElementById('formdata').value = "Add Expense"
 
-        const data = await axios.get(`http://localhost:3000/getExpenses`, {
+        const data = await axios.get(`http://localhost:3000/expense/getExpenses`, {
             headers: {
                 'Auth': token
             }
@@ -273,7 +273,7 @@ async function getData() {
     const page = params.get("page") || 1
     axios
         .get(
-            `http://localhost:3000/getExpenses?page=${page}&count=${rows}`, {
+            `http://localhost:3000/expense/getExpenses?page=${page}&count=${rows}`, {
                 headers: {
                     'Auth': token,
                 }
@@ -297,7 +297,7 @@ async function leaderBoardFunction(e) {
     //check for premium user
     try {
         const data = await axios.get(
-            "http://localhost:3000/getExpenses", {
+            "http://localhost:3000/expense/getExpenses", {
                 headers: {
                     'Auth': token
                 }
@@ -313,7 +313,7 @@ async function leaderBoardFunction(e) {
             image.className = "fa-solid fa-eye-slash fa-lg"
             document.getElementById('leaderboard').style.display = 'flex'
             const token = document.getElementById('token')
-            const result = await axios.get('http://localhost:3000/leaderboard', {
+            const result = await axios.get('http://localhost:3000/expense/leaderboard', {
                 headers: {
                     'Auth': token
                 }
@@ -416,7 +416,7 @@ async function getProducts(page) {
         rows = rowsPerPage
     }
     try {
-        const data = await axios.get(`http://localhost:3000/getExpenses?page=${page}&count=${rows}`, {
+        const data = await axios.get(`http://localhost:3000/expense/getExpenses?page=${page}&count=${rows}`, {
             headers: {
                 'Auth': token
             }

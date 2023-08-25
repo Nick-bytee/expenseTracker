@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', showHistory)
 async function showHistory(){
     const token = localStorage.getItem('token')
     try {
-        const response = await axios.get('http://localhost:3000/getDownloadHistory', {headers : { 'Auth' : token}})
+        const response = await axios.get('http://localhost:3000/expense/getDownloadHistory', {headers : { 'Auth' : token}})
         if(response.data.isPremium){
             showData(response.data.data)
             console.log(response.data)

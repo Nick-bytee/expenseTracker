@@ -14,9 +14,10 @@ app.use(express.json())
 app.use(cors())
 
 const purchaseRoute = require('./routes/purchase')
-const mainRoute = require('./routes/expense')
+const expenseRoute = require('./routes/expense')
 const userRoute = require('./routes/users')
 const passwordRoute = require('./routes/password')
+const mainRoute = require('./routes/main')
 
 const User = require('./models/user')
 const Expenses = require('./models/expense')
@@ -44,7 +45,8 @@ app.use(morgan('combined',{stream : accessFileStream}))
 app.use('/password', passwordRoute)
 app.use('/purchase', purchaseRoute)
 app.use('/users', userRoute)
-app.use('/', mainRoute)
+app.use('/expense', expenseRoute)
+app.use('/', homeRoute)
 
 sequelize.sync().then(
     app.listen(3000)
