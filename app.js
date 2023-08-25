@@ -46,7 +46,12 @@ app.use('/password', passwordRoute)
 app.use('/purchase', purchaseRoute)
 app.use('/users', userRoute)
 app.use('/expense', expenseRoute)
-app.use('/', homeRoute)
+
+
+app.use('/', (req, res) => {
+    const filePath = path.join(__dirname, `/${req.url}`)
+    res.sendFile(filePath)
+})
 
 sequelize.sync().then(
     app.listen(3000)

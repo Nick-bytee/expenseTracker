@@ -1,7 +1,18 @@
-const signInButton = document.getElementById('signIn')
-signIn.addEventListener('submit', validateUser)
+const forgotPasswordButton = document.getElementById('forgotPsk')
+forgotPasswordButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    window.location.href = './forgotPassword.html'
+})
 
-async function validateUser() {
+const signUp = document.getElementById('signUp')
+signUp.addEventListener('click', () => {
+    window.location.href = './signUp.html'
+})
+
+
+
+async function validateUser(e) {
+    e.preventDefault()
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
 
@@ -32,7 +43,6 @@ async function validateUser() {
 
 }
 
-async function forgotPassword(e) {
-    window.location.href = './forgotPassword.html'
-}
+
+
 
