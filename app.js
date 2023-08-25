@@ -17,7 +17,6 @@ const purchaseRoute = require('./routes/purchase')
 const expenseRoute = require('./routes/expense')
 const userRoute = require('./routes/users')
 const passwordRoute = require('./routes/password')
-const homeRoute = require('./routes/main')
 
 const User = require('./models/user')
 const Expenses = require('./models/expense')
