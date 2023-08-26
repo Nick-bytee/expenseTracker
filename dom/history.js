@@ -1,9 +1,10 @@
 window.addEventListener('DOMContentLoaded', showHistory)
+const backendAPI = 'http://54.159.112.7:3000'
 
 async function showHistory(){
     const token = localStorage.getItem('token')
     try {
-        const response = await axios.get('http://54.159.112.7:3000/expense/getDownloadHistory', {headers : { 'Auth' : token}})
+        const response = await axios.get(`${backendAPI}/expense/getDownloadHistory`, {headers : { 'Auth' : token}})
         if(response.data.isPremium){
             showData(response.data.data)
             document.getElementById('span').innerHTML = response.data.userName
