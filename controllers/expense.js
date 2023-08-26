@@ -4,9 +4,9 @@ const User = require('../models/user')
 const sequelize = require('../database/database')
 const AWS = require('aws-sdk')
 const DownloadHistory = require('../models/downloadHistory')
-const { resolve } = require('path')
-const { fileURLToPath } = require('url')
 require('dotenv').config()
+
+
 
 exports.leaderboardData = async (req, res) => {
     const result = await User.findAll({

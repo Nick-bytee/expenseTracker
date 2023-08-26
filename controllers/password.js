@@ -14,7 +14,6 @@ exports.sendMail = async (req, res, next) => {
     const t = sequelize.transaction()
     apiKey.apiKey = process.env.EMAIL_API
 
-
     const tranMailApi = new sib.TransactionalEmailsApi()
 
     const sender = {
@@ -32,7 +31,7 @@ exports.sendMail = async (req, res, next) => {
             //creating request
         const uuid = UUID.v4()
         await user.createForgotPasswordRequest({
-            uuid: uuid,
+            uuid : uuid,
             userId: user.id,
             isActive: true
         },{transaction : t})

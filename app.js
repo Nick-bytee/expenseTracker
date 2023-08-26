@@ -31,13 +31,14 @@ User.hasMany(Orders)
 Orders.belongsTo(User)
 
 User.hasMany(ForgotPasswordRequest)
+ForgotPasswordRequest.belongsTo(User)
 
 DownloadHistory.belongsTo(User)
 User.hasMany(DownloadHistory)
 
 const accessFileStream = fs.createWriteStream(path.join(__dirname, 'access.log'),{flags : 'a'})
 
-app.use(compression())
+// app.use(compression())
 // app.use(helmet())
 app.use(morgan('combined',{stream : accessFileStream}))
 

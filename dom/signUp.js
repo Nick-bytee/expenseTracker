@@ -1,3 +1,4 @@
+const backendAPI = 'http://54.159.112.7:3000'
 const signUp = document.getElementById('signUp')
 document.addEventListener('submit', addUser)
 
@@ -24,7 +25,7 @@ async function addUser(e) {
     }
 
     try {
-        const result = await axios.post('http://54.159.112.7:3000/users/Adduser', myObj)
+        const result = await axios.post(`${backendAPI}/users/Adduser`, myObj)
         const message = document.getElementById('Message')
         message.innerHTML = result.data.message
         message.style.color = 'green'

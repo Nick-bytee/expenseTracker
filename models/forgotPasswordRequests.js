@@ -5,7 +5,7 @@ const ForgotPasswordRequest = sequelize.define('forgotPasswordRequests', {
     uuid : {
         type : Sequelize.STRING,
         notNull : true,
-        primaryKey : ' true'
+        primaryKey : true
     },
     userId : {
         type : Sequelize.INTEGER

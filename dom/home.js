@@ -1,6 +1,7 @@
 let form = document.getElementById('addForm')
 var table = document.getElementById('table')
 document.addEventListener('submit', additem)
+const backendAPI = 'http://localhost:3000'
 
 var editID;
 var token = localStorage.getItem('token')
@@ -56,28 +57,9 @@ function createli(parsedData) {
                 }
             }(item.id));
 
-            // //creating edit button with className
-            // var editbtn = document.createElement('button')
-            // editbtn.className = "btn"
-            // var icon2 = document.createElement('i')
-            // icon2.className = "fa-regular fa-pen-to-square"
-            // icon2.style.height = '24px'
-            // icon2.style.width = '24px'
-            // editbtn.appendChild(icon2)
-
-            // //edit button eventlistener
-            // editbtn.addEventListener('click', function (Item) {
-            //     return function () {
-            //         editItem(Item)
-            //     }
-            // }(item))
-
             //adding buttons to li element
             tr.appendChild(deletebtn)
-            // tr.appendChild(editbtn)
 
-            //adding li to main list
-            // items.appendChild(li)
             table.append(tr)
         };
     }
@@ -86,7 +68,7 @@ function createli(parsedData) {
 document.getElementById('rzp-button').onclick = async function (e) {
     const token = localStorage.getItem('token');
     try {
-        const response = await axios.get('http://54.159.112.7:3000/purchase/purchaseMembership', {
+        const response = await axios.get(`${backendAPI}/purchase/purchaseMembership`, {
             headers: {
                 'Auth': token
             }
@@ -99,7 +81,7 @@ document.getElementById('rzp-button').onclick = async function (e) {
                 alert('Transaction Successful')
                 // checkPremium(true)
                 try {
-                    await axios.post('http://54.159.112.7:3000/purchase/updateTransactionStatus', {
+                    await axios.post(`${backendAPI}/purchase/updateTransactionStatus`, {
                         order_id: options.order_id,
                         paymentId: response.razorpay_payment_id,
                         status: true
@@ -121,7 +103,7 @@ document.getElementById('rzp-button').onclick = async function (e) {
 
         rzp1.on('payment.failed', async function (response) {
             try {
-                axios.post('http://54.159.112.7:3000/purchase/updateTransactionStatus', {
+                axios.post(`${backendAPI}/purchase/updateTransactionStatus`, {
                     order_id: response.error.metadata.order_id,
                     paymentId: response.error.metadata.payment_id,
                     status: false
@@ -160,10 +142,10 @@ async function additem(a) {
             token: token
         };
         try {
-            await axios.post('http://54.159.112.7:3000/addExpense',
+            await axios.post(`${backendAPI}/addExpense`,
                 my_obj)
 
-            const data = await axios.get(`http://54.159.112.7:3000/expense/getExpenses`, {
+            const data = await axios.get(`${backendAPI}/expense/getExpenses`, {
                 headers: {
                     'Auth': token
                 }
@@ -186,13 +168,13 @@ async function deleteItem(id) {
     const token = localStorage.getItem('token')
     if (confirm('Are You Sure You want to delete this item?')) {
         try {
-            await axios.delete(`http://54.159.112.7:3000/expense/deleteExpense/${id}`, {
+            await axios.delete(`${backendAPI}/expense/deleteExpense/${id}`, {
                 headers: {
                     'Auth': token
                 }
             })
 
-            const data = await axios.get(`http://54.159.112.7:3000/expense/getExpenses`, {
+            const data = await axios.get(`${backendAPI}/expense/getExpenses`, {
                 headers: {
                     'Auth': token
                 }
@@ -216,12 +198,12 @@ async function saveUpdatedItem() {
     const form = document.getElementById('addForm')
     form.children.innerHTML = ''
     try {
-        await axios.put(`http://54.159.112.7:3000/expense/updateExpense/${editID}`,
+        await axios.put(`${backendAPI}/expense/updateExpense/${editID}`,
             obj)
 
         document.getElementById('formdata').value = "Add Expense"
 
-        const data = await axios.get(`http://54.159.112.7:3000/expense/getExpenses`, {
+        const data = await axios.get(`${backendAPI}/expense/getExpenses`, {
             headers: {
                 'Auth': token
             }
@@ -234,14 +216,6 @@ async function saveUpdatedItem() {
 }
 
 
-// function editItem(item) {
-//     document.getElementById('amount').value = item.amount;
-//     document.getElementById('desc').value = item.description;
-//     document.getElementById('category').options[document.getElementById('category').selectedIndex].textContent = item.category;
-//     document.getElementById('formdata').value = 'Save'
-//     editID = item.id
-// }
-
 function checkPremium(isPremium) {
     if (isPremium) {
         parent = document.getElementById('rzp-button').parentElement
@@ -251,6 +225,10 @@ function checkPremium(isPremium) {
         const report = document.getElementById('reports')
         report.style.opacity = "1"
         report.className = "nav-link px-0 align-middle"
+
+        const history = document.getElementById('history')
+        history.style.opacity = "1"
+        history.className = "nav-link px-0 align-middle"
     }
 }
 
@@ -273,7 +251,7 @@ async function getData() {
     const page = params.get("page") || 1
     axios
         .get(
-            `http://54.159.112.7/:3000/expense/getExpenses?page=${page}&count=${rows}`, {
+            `${backendAPI}/expense/getExpenses?page=${page}&count=${rows}`, {
                 headers: {
                     'Auth': token,
                 }
@@ -298,7 +276,7 @@ async function leaderBoardFunction(e) {
     //check for premium user
     try {
         const data = await axios.get(
-            "http://54.159.112.7:3000/expense/getExpenses", {
+            `${backendAPI}/expense/getExpenses`, {
                 headers: {
                     'Auth': token
                 }
@@ -314,7 +292,7 @@ async function leaderBoardFunction(e) {
             image.className = "fa-solid fa-eye-slash fa-lg"
             document.getElementById('leaderboard').style.display = 'flex'
             const token = document.getElementById('token')
-            const result = await axios.get('http://54.159.112.7:3000/expense/leaderboard', {
+            const result = await axios.get(`${backendAPI}/expense/leaderboard`, {
                 headers: {
                     'Auth': token
                 }
@@ -417,7 +395,7 @@ async function getProducts(page) {
         rows = rowsPerPage
     }
     try {
-        const data = await axios.get(`http://54.159.112.7:3000/expense/getExpenses?page=${page}&count=${rows}`, {
+        const data = await axios.get(`${backendAPI}/expense/getExpenses?page=${page}&count=${rows}`, {
             headers: {
                 'Auth': token
             }

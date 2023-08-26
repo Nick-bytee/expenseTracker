@@ -1,3 +1,4 @@
+const backendAPI = 'http://54.159.112.7:3000'
 const forgotPasswordButton = document.getElementById('forgotPsk')
 forgotPasswordButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -23,7 +24,7 @@ async function validateUser(e) {
         password: password
     }
     try {
-        const result = await axios.post('http://54.159.112.7:3000/users/signIn', validate)
+        const result = await axios.post(`${backendAPI}/users/signIn`, validate)
         const message = document.getElementById('Message')
         if (result.data.success) {
             message.innerHTML = result.data.message
