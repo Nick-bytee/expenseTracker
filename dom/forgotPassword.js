@@ -8,7 +8,7 @@ async function resetPassword(e){
         email : email
     }
     try {
-        const data = await axios.post('http://localhost:3000/password/forgotPassword', myObj)
+        const data = await axios.post('http://54.159.112.7:3000/password/forgotPassword', myObj)
         const message = document.getElementById('message')
         message.innerHTML = data.data.message
         message.style.color = 'green'

@@ -5,7 +5,7 @@ async function downloadReport(event) {
     const token = localStorage.getItem('token')
     event.preventDefault()
     try{
-        const report = await axios.get('http://localhost:3000/expense/downloadReport', {headers : {'Auth' : token}})
+        const report = await axios.get('http://54.159.112.7:3000/expense/downloadReport', {headers : {'Auth' : token}})
         console.log(report)
         if(report.status === 200){
             const a = document.createElement('a')
@@ -24,7 +24,7 @@ async function downloadReport(event) {
 window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
     try {
-        const expenses = await axios.get('http://localhost:3000/expense/getReport', {
+        const expenses = await axios.get('http://54.159.112.7:3000/expense/getReport', {
             headers: {
                 'Auth': token
             }
