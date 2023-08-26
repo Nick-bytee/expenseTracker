@@ -86,7 +86,14 @@ exports.getData = async (req, res) => {
         } else {
             res.status(200).json({
                 expenses,
-                isPremium: false
+                userName : user.name,
+                isPremium: false,
+                hasNextPage : ITEMS_PER_PAGE * page < totalItems,
+                nextPage : 1 + +page,
+                hasPreviousPage : page > 1,
+                previousPage : page - 1,
+                lastPage : Math.ceil(totalItems / ITEMS_PER_PAGE),
+                currentPage : page
             })
         }
     } catch (err) {
