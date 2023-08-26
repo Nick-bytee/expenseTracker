@@ -1,11 +1,17 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    background: lightgrey;
+    background-color: black !important;
+    color: white !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 55rem;
     display: flex
+}
+
+.form-select{
+    background-color: black !important;
+    color: white !important;
 }
 
 .heading{
@@ -31,7 +37,8 @@ body {
 
 .containers {
     width: fit-content;
-    background: #fff;
+    background-color: black !important;
+    color: white !important;
     /* border-radius: 10px; */
     /* box-shadow: 0 14px 28px rgba(0, 0, 0, .2), 0 10px 10px rgba(0, 0, 0, .2); */
     /* position: relative; */

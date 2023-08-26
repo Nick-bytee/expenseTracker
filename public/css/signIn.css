@@ -1,6 +1,7 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    background: lightgrey;
+    background-color: black !important;
+    color: white !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -12,7 +13,6 @@ body {
     display: flex;
     justify-content: center;
 }
-
 
 .form-wrapper {
     width : 50%;
