@@ -32,6 +32,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         if(!expenses.data.isPremium){
             window.alert('You are not a premium user')
         }else {
+            document.getElementById('span').innerHTML = expenses.data.userName
             createReports(expenses.data.expenses)
         }
     } catch (err) {
@@ -82,3 +83,9 @@ function createReports(data) {
     }
     total.innerHTML = totalExpense
 };
+
+const signOut = document.getElementById('signOut')
+signOut.addEventListener('click' , () => {
+    localStorage.removeItem('token');
+    window.location.href = './signIn.html'
+})

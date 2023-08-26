@@ -280,6 +280,7 @@ async function getData() {
             }
         )
         .then((data) => {
+            document.getElementById('span').innerHTML = data.data.userName
             checkPremium(data.data.isPremium)
             createli(data.data)
             pagination(data.data)
@@ -434,4 +435,10 @@ select.addEventListener('change', () => {
     const selectedElement = event.target.value
     localStorage.setItem('rowsPerPage', selectedElement)
     getData()
+})
+
+const signOut = document.getElementById('signOut')
+signOut.addEventListener('click' , () => {
+    localStorage.removeItem('token');
+    window.location.href = './signIn.html'
 })

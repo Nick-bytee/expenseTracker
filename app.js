@@ -38,7 +38,7 @@ User.hasMany(DownloadHistory)
 const accessFileStream = fs.createWriteStream(path.join(__dirname, 'access.log'),{flags : 'a'})
 
 app.use(compression())
-app.use(helmet())
+// app.use(helmet())
 app.use(morgan('combined',{stream : accessFileStream}))
 
 app.use('/password', passwordRoute)

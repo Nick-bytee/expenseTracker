@@ -6,7 +6,7 @@ async function showHistory(){
         const response = await axios.get('http://localhost:3000/expense/getDownloadHistory', {headers : { 'Auth' : token}})
         if(response.data.isPremium){
             showData(response.data.data)
-            console.log(response.data)
+            document.getElementById('span').innerHTML = response.data.userName
         }else{
             window.alert('You are not a premium user')
         }
@@ -60,3 +60,9 @@ function showData(data){
     table.append(tr)
     }
 }
+
+const signOut = document.getElementById('signOut')
+signOut.addEventListener('click' , () => {
+    localStorage.removeItem('token');
+    window.location.href = './signIn.html'
+})

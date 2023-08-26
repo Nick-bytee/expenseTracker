@@ -74,6 +74,7 @@ exports.getData = async (req, res) => {
         if (user.isPremium) {
             res.status(200).json({
                 expenses,
+                userName : user.name,
                 isPremium: true,
                 hasNextPage : ITEMS_PER_PAGE * page < totalItems,
                 nextPage : 1 + +page,
@@ -197,7 +198,7 @@ exports.getDownloadHistory = async(req, res) => {
         const response = await DownloadHistory.findAll({
             where : {userId : req.user.id}
         })
-        res.status(200).json({data : response, isPremium : req.user.isPremium})
+        res.status(200).json({data : response, isPremium : req.user.isPremium, userName : req.user.name})
     }catch(err){
         console.log(err)
     }

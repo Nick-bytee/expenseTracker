@@ -9,6 +9,8 @@ signUp.addEventListener('click', () => {
     window.location.href = './signUp.html'
 })
 
+const signIn = document.getElementById('signIn')
+signIn.addEventListener('click', validateUser)
 
 
 async function validateUser(e) {

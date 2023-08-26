@@ -2,7 +2,9 @@ const signUp = document.getElementById('signUp')
 document.addEventListener('submit', addUser)
 
 const signIn = document.getElementById('signIn')
-signIn.addEventListener('click', loginPage)
+signIn.addEventListener('click', () => {
+    window.location.href = './signIn.html'
+})
 
 
 async function addUser(e) {
@@ -15,8 +17,7 @@ async function addUser(e) {
     const name = document.getElementById('name').value
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    console.log(name)
-     const myObj = {
+    const myObj = {
         name: name,
         email: email,
         password: password
@@ -28,8 +29,8 @@ async function addUser(e) {
         message.innerHTML = result.data.message
         message.style.color = 'green'
         setTimeout(() => {
-            loginPage()
-        }, 1500);
+            window.location.href = "./signIn.html"
+        }, 1000)
     } catch (err) {
         if (err.response && err.response.status === 400) {
             document.getElementById('Message').innerHTML = err.data.message
@@ -37,4 +38,3 @@ async function addUser(e) {
     }
 
 }
-
