@@ -1,7 +1,7 @@
 let form = document.getElementById('addForm')
 var table = document.getElementById('table')
 document.addEventListener('submit', additem)
-const backendAPI = 'http://54.159.112.7:3000/:3000'
+const backendAPI = 'http://54.159.112.7:3000'
 
 var editID;
 var token = localStorage.getItem('token')
@@ -142,7 +142,7 @@ async function additem(a) {
             token: token
         };
         try {
-            await axios.post(`${backendAPI}/addExpense`,
+            await axios.post(`${backendAPI}expense/addExpense`,
                 my_obj)
 
             const data = await axios.get(`${backendAPI}/expense/getExpenses`, {
@@ -259,7 +259,7 @@ async function getData() {
         )
         .then((data) => {
             document.getElementById('span').innerHTML = data.data.userName
-            checkPremium(data.data.isPremium)
+            // checkPremium(data.data.isPremium)
             createli(data.data)
             pagination(data.data)
 

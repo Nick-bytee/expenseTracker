@@ -35,11 +35,18 @@ window.addEventListener("DOMContentLoaded", async () => {
         }else {
             document.getElementById('span').innerHTML = expenses.data.userName
             createReports(expenses.data.expenses)
+            premiumFunction()
         }
     } catch (err) {
         console.log(err)
     }
 })
+
+function premiumFunction(){
+    parent = document.getElementById('rzp-button').parentElement
+        parent.style.display = 'none'
+        const ul = document.createElement('ul')
+}
 
 function createReports(data) {
     const table = document.getElementById('reportsTable')

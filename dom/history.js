@@ -8,12 +8,18 @@ async function showHistory(){
         if(response.data.isPremium){
             showData(response.data.data)
             document.getElementById('span').innerHTML = response.data.userName
+            premiumFunction()
         }else{
             window.alert('You are not a premium user')
         }
     }catch(err){
         console.log(err)
     }
+}
+
+function premiumFunction(){
+    parent = document.getElementById('rzp-button').parentElement
+        parent.style.display = 'none'
 }
 
 function showData(data){
